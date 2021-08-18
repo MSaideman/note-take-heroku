@@ -2,6 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+
+// require functions to create and delete notes
 const { createNewNote } = require('./assets/js/createNotes');
 const { deleteNote } = require('./assets/js/deleteNotes');
 
