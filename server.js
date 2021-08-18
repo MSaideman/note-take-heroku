@@ -36,6 +36,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
+// create notes route
 app.post('/api/notes', (req, res) => {
     const newNote = createNewNote(req.body, notes);
     res.json(newNote);
