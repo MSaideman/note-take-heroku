@@ -35,6 +35,7 @@ app.get('*', (req, res) => {
 });
 
 // create notes function
+// TO DO: make into express route
 function createNewNote(body, notesArr) {
     const newNote = body;
     if (!Array.isArray(notesArr))
@@ -59,6 +60,7 @@ app.post('/api/notes', (req, res) => {
     res.json(newNote);
 });
 
+// TO DO: make into express route
 function deleteNote(id, notesArr) {
     for (let i = 0; i < notesArr.length; i++) {
         let note = notesArr[i];
@@ -74,6 +76,7 @@ function deleteNote(id, notesArr) {
         }
     }
 }
+
 // delete notes function
 app.delete('/api/notes/:id',(req,res) => {
     deleteNote(req.params.id, notes)
