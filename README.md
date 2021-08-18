@@ -10,7 +10,7 @@
 2. heroku login
 3. git init
 4. heroku create
-   _Created https://protected-dawn-30396.herokuapp.com/ | git@heroku.com:rotected-dawn-30396.git_
+   _Created https://protected-dawn-30396.herokuapp.com/ | git@heroku.com:protected-dawn-30396.git_
 5. git add .
 6. git commit -m "change notes"
 7. git push heroku master
