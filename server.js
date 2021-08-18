@@ -2,6 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { createNewNote } = require('./assets/js/createNotes');
+const { deleteNote } = require('./assets/js/deleteNotes');
 
 // call express module
 const app = express();
@@ -34,50 +36,12 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-// create notes function
-// TO DO: make into new file
-function createNewNote(body, notesArr) {
-    const newNote = body;
-    if (!Array.isArray(notesArr))
-        notesArr = [];
-    
-    if (notesArr.length === 0)
-        notesArr.push(0);
-
-    body.id = notesArr[0];
-    notesArr[0]++;
-
-    notesArr.push(newNote);
-    fs.writeFileSync(
-        path.join(__dirname, './db/db.json'),
-        JSON.stringify(notesArr, null, 2)
-    );
-    return newNote;
-}
-
 app.post('/api/notes', (req, res) => {
     const newNote = createNewNote(req.body, notes);
     res.json(newNote);
 });
 
-// TO DO: make into new file
-function deleteNote(id, notesArr) {
-    for (let i = 0; i < notesArr.length; i++) {
-        let note = notesArr[i];
-
-        if (note.id == id) {
-            notesArr.splice(i, 1);
-            fs.writeFileSync(
-                path.join(__dirname, './db/db.json'),
-                JSON.stringify(notesArr, null, 2)
-            );
-
-            break;
-        }
-    }
-}
-
-// delete notes function
+// delete notes route
 app.delete('/api/notes/:id',(req,res) => {
     deleteNote(req.params.id, notes)
     res.json(true);

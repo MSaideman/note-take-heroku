@@ -1,4 +1,4 @@
-const express = require('express'); 
+// const express = require('express'); 
 
 // TO DO: make into new file
 function deleteNote(id, notesArr) {
@@ -16,3 +16,5 @@ function deleteNote(id, notesArr) {
         }
     }
 }
+
+module.exports = deleteNote;
