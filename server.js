@@ -3,10 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-// require functions to create and delete notes
-const { createNewNote } = require('./assets/js/createNotes');
-const { deleteNote } = require('./assets/js/deleteNotes');
-
 // call express module
 const app = express();
 
@@ -21,34 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// routes
-app.get('/api/notes', (req, res) => {
-    res.json(notes.slice(1));
-});
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-// create notes route
-app.post('/api/notes', (req, res) => {
-    const newNote = createNewNote(req.body, notes);
-    res.json(newNote);
-});
-
-// delete notes route
-app.delete('/api/notes/:id',(req,res) => {
-    deleteNote(req.params.id, notes)
-    res.json(true);
-});
+app.use(require('./routes/apiroutes'));
+app.use(require('./routes/htmlroutes'));
 
 // listen to port function
 app.listen(PORT, () => {
